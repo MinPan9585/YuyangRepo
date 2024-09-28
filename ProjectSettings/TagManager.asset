@@ -12,6 +12,8 @@ TagManager:
   - FirePlace
   - WindBox
   - IgnoreForDrag
+  - BaseMed
+  - EndStateOne
   layers:
   - Default
   - TransparentFX
