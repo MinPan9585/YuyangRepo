@@ -7,4 +7,5 @@ public class BaseMed : MonoBehaviour
     public float cure;
     public float temp;
     public float pois;
+    public List<string> symps;
 }

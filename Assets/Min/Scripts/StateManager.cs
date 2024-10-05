@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 //using UnityEngine.Windows;
@@ -19,10 +20,7 @@ public class StateManager : MonoBehaviour
             {
                 if (state == 0)
                 {
-                    if (hit.collider.gameObject.CompareTag("BaseMed"))
-                    {
-                        AddIngredients(hit.collider.GetComponent<BaseMed>());
-                    }
+                    
                     if (hit.collider.gameObject.CompareTag("EndStateOne"))
                     {
                         state = 1;
@@ -31,9 +29,9 @@ public class StateManager : MonoBehaviour
 
                 if (state == 1)
                 {
-                    if (hit.collider.gameObject.CompareTag("Hammer"))
+                    if (hit.collider.gameObject.CompareTag("BaseMed"))
                     {
-                        hit.collider.GetComponent<Hammer>().HammerMed();
+                        AddIngredients(hit.collider.GetComponent<BaseMed>());
                     }
                     if (hit.collider.gameObject.CompareTag("EndStateTwo"))
                     {
@@ -43,15 +41,27 @@ public class StateManager : MonoBehaviour
 
                 if (state == 2)
                 {
-                    if (hit.collider.gameObject.CompareTag("Windbox"))
+                    if (hit.collider.gameObject.CompareTag("Hammer"))
                     {
-                        // warm
+                        
                     }
                     //if (hit.collider.gameObject.CompareTag("AddWater"))
                     //{
                     // cool
                     //}
                     if (hit.collider.gameObject.CompareTag("EndStateThree"))
+                    {
+                        // end
+                    }
+                }
+
+                if(state == 3)
+                {
+                    if (hit.collider.gameObject.CompareTag("Windbox"))
+                    {
+                        // warm
+                    }
+                    if (hit.collider.gameObject.CompareTag("EndStateFour"))
                     {
                         // end
                     }
@@ -69,6 +79,11 @@ public class StateManager : MonoBehaviour
             bowl.GetChild(0).GetComponent<BaseMed>().cure += baseMed.cure;
             bowl.GetChild(0).GetComponent<BaseMed>().temp += baseMed.temp;
             bowl.GetChild(0).GetComponent<BaseMed>().pois += baseMed.pois;
+            foreach(string _symp in baseMed.symps)
+            {
+                if (!bowl.GetChild(0).GetComponent<BaseMed>().symps.Contains(_symp))
+                    bowl.GetChild(0).GetComponent<BaseMed>().symps.Add(_symp);
+            }
         }
         if (bowl.childCount == 0)
         {
@@ -79,6 +94,7 @@ public class StateManager : MonoBehaviour
             mixed.GetComponent<BaseMed>().cure = baseMed.cure;
             mixed.GetComponent<BaseMed>().temp = baseMed.temp;
             mixed.GetComponent<BaseMed>().pois = baseMed.pois;
+            mixed.GetComponent<BaseMed>().symps = baseMed.symps;
         }
         // play animation
     }
