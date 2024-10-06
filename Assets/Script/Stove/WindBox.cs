@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class WindBox : MonoBehaviour
 {
-    private Vector2 windBoxPos;
+    public Vector2 windBoxPos;
     private Vector2 currentWindBoxPos;
     private Vector2 initialPos;
     private Vector2 offset;
     private float offsetValue;
+    private StateManager stateManager;
 
     public Rigidbody2D rb;
     public bool canActiveWindBox;
@@ -16,9 +17,9 @@ public class WindBox : MonoBehaviour
     public float moveHandleDistance;
     private void Awake()
     {
+        stateManager = FindAnyObjectByType<StateManager>();
         canActiveWindBox = false;
         rb = GetComponent<Rigidbody2D>();
-        windBoxPos = transform.position;
     }
     void Start()
     {
@@ -65,8 +66,8 @@ public class WindBox : MonoBehaviour
     }
     private void MoveHandle()
     {
-        Vector2 boxOffset = currentWindBoxPos - windBoxPos;
         currentWindBoxPos = transform.position;
+        Vector2 boxOffset = currentWindBoxPos - windBoxPos;
         if (canActiveWindBox && Vector2.Distance(windBoxPos, currentWindBoxPos) <= moveHandleDistance)
         {
             rb.velocity = new Vector2(offset.normalized.x, 0);

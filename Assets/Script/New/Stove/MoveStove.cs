@@ -6,6 +6,7 @@ public class MoveStove : MonoBehaviour
 {
     public bool canMove;
     public GameObject mask;
+    public WindBox windBox;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,10 @@ public class MoveStove : MonoBehaviour
         {
             LeanTween.scale(gameObject, new Vector3(1.25f, 1.25f, 1.25f), 1).setEaseInOutCubic();
             LeanTween.moveX(gameObject, 5.8f, 1).setEaseInOutCubic();
-            LeanTween.moveY(gameObject, 1.25f, 1).setEaseInOutCubic();
+            LeanTween.moveY(gameObject, 1.25f, 1).setEaseInOutCubic().setOnComplete(() =>
+            {
+                windBox.windBoxPos = windBox.transform.position;
+            });
             mask.GetComponent<SpriteRenderer>().enabled = true;
             canMove = !canMove;
         }
