@@ -9,14 +9,13 @@ public class PHobj : MonoBehaviour
     void Start()
     {
         stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
-        
     }
 
     // Update is called once per frame
     void Update()
     {
         if(stateManager.state == 1&&!isOpen)
-        {  
+        {
             LeanTween.moveY(transform.gameObject, 0, 1).setEaseInOutCubic();
             isOpen = true;
         }

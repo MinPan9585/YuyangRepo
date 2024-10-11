@@ -26,20 +26,26 @@ public class Hammer : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-                if (hit.collider != null&& hit.collider.CompareTag("Hammer"))
+                RaycastHit2D[] hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+                if(hits.Length > 0)
                 {
-                    if (!isBusy&&mixedMed!=null)
+                    foreach(RaycastHit2D hit in hits)
                     {
-                        mixedMed.GetComponent<BaseMed>().cure += 2;
-                        mixedMed.GetComponent<BaseMed>().pois += 2;
-                    }
-                    isSmashing = true;
-                    isBusy = true;
+                        if (hit.collider != null&& hit.collider.CompareTag("Hammer"))
+                        {
+                            if (!isBusy&&mixedMed!=null)
+                            {
+                                mixedMed.GetComponent<BaseMed>().cure += 2;
+                                mixedMed.GetComponent<BaseMed>().pois += 2;
+                            }
+                            isSmashing = true;
+                            isBusy = true;
                     
+                        }
+                        else
+                            Debug.Log("");
+                    }
                 }
-                else
-                    Debug.Log("");
             }
         }
     }

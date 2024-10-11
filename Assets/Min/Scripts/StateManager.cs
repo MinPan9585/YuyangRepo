@@ -57,11 +57,11 @@ public class StateManager : MonoBehaviour
 
                 if(state == 3)
                 {
-                    if (hit.collider.gameObject.CompareTag("Windbox"))
+                    //if (hit.collider.gameObject.CompareTag("Windbox"))
                     {
                         // warm
                     }
-                    if (hit.collider.gameObject.CompareTag("EndStateFour"))
+                    //if (hit.collider.gameObject.CompareTag("EndStateFour"))
                     {
                         // end
                     }

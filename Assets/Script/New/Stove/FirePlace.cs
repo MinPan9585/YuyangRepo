@@ -6,6 +6,9 @@ public class FirePlace : MonoBehaviour
 {
     public Fire fire;
     public WindBox windBox;
+    public Timer timer;
+    public MedMaking medMaking;
+    public MedMakingUI medMakingUI;
 
     private StateManager stateManager;
     // Start is called before the first frame update
@@ -26,6 +29,9 @@ public class FirePlace : MonoBehaviour
                 {
                     fire.GetComponent<SpriteRenderer>().enabled = true;
                     windBox.canActiveWindBox = true;
+                    timer.startRound = true;
+                    medMaking.start = true;
+                    medMakingUI.canMove = true;
                 }
             }
         }

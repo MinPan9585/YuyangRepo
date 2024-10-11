@@ -18,6 +18,7 @@ TagManager:
   - EndStateThree
   - EndStateFour
   - Hammer
+  - Bucket
   layers:
   - Default
   - TransparentFX
